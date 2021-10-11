@@ -1,0 +1,32 @@
+At each state, every agent observes the same state; it's just that only one of those players gets to decide on an action in a particular state.
+
+So, I have come up with the following: A l
+-player MDP is ((Si)i∈[l],P,A,(Ri)i∈[l],γ)
+
+where the pieces mean the following:
+
+    Si
+
+is the set of states where it's player i's turn; all Si
+are pairwise disjoint
+P(s′|s,a)
+is the probability to get from s to s′ with action a
+.
+A
+is set of actions; we assume the same action set for each state
+Ri(s,a)
+is the real reward for player i doing action a in state s
+0≤γ<1
+
+    is the discount factor
+
+Now, let's define the value function vi
+for each player i, where vi(s) is the expected discounted sum of rewards for player i from state s onwards. If s∈Sj, then
+vi(s)=R(s,a(s))+∑s′P(s′|s,a(s))⋅γvi(s′),
+where
+a(s)=argmaxaR(s,a(s))+∑s′P(s′|s,a)⋅γvj(s′).
+
+So basically, the value of state s
+for player i is the value of the expected next state if the action is chosen by the player whose turn it is in state s. Note that if i=j, so if it's player i's turn, then the above formula becomes:
+vi(s)=maxaR(s,a)+∑s′P(s′|s,a)⋅γvi(s′)
+which is exactly as in a 1-player MDP.
